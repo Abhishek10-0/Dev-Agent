@@ -7,11 +7,11 @@ This agent does it all in one click.
 
 ## What it does
 
-You press one button. Coral SQL quietly joins your GitHub repos, Slack channels, and Notion tasks in a single query — no API juggling, no copy-pasting. Then an AI reads that data and writes your standup for you. Real data. Real output.
+You press one button. Coral SQL quietly joins your GitHub repos, Slack channels, and Notion tasks in a single query, no API juggling, no copy-pasting. Then an AI reads that data and writes your standup for you. Real data. Real output.
 
 It also spots repos you haven't touched in months and flags them. Because we all have that one abandoned project we keep meaning to get back to.
 
-And since Notion is where I actually track my work, I made it so you can add tasks, mark them done, and change their status — all from the same screen, without ever opening Notion.
+And since Notion is where I actually track my work, I made it so you can add tasks, mark them done, and change their status  all from the same screen, without ever opening Notion.
 
 ## The part that surprised me
 
@@ -29,12 +29,12 @@ That query runs across two completely different APIs. No glue code. No ETL. Just
 
 ## Stack
 
-- **Coral** — the thing that makes all of this possible
-- **GitHub** — repo and activity data
-- **Slack** — channels and workspace
-- **Notion** — tasks, with full read and write
-- **Groq (llama-3.1)** — generates the standup
-- **React + Node.js** — frontend and backend
+- **Coral** : the thing that makes all of this possible
+- **GitHub** : repo and activity data
+- **Slack** : channels and workspace
+- **Notion** : tasks, with full read and write
+- **Groq (llama-3.1)** : generates the standup
+- **React + Node.js** : frontend and backend
 
 ## Running it locally
 
@@ -63,4 +63,4 @@ NOTION_TOKEN=your_notion_token
 
 ## Built for Pirates of the Coral-bean Hackathon
 
-Track 2 — Personal Agent
+Track 2 : Personal Agent
