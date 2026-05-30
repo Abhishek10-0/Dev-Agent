@@ -92,6 +92,52 @@ app.post('/api/notion/tasks', async (req, res) => {
   }
 });
 
+// Task Status Update karo
+app.patch('/api/notion/tasks/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+    const response = await fetch(`https://api.notion.com/v1/pages/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Authorization': `Bearer ${process.env.NOTION_TOKEN}`,
+        'Content-Type': 'application/json',
+        'Notion-Version': '2022-06-28'
+      },
+      body: JSON.stringify({
+        properties: {
+          Status: { status: { name: status } }
+        }
+      })
+    });
+    const data = await response.json();
+    res.json({ success: true, id: data.id });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Neglected Repos — GitHub + Slack JOIN
+app.get('/api/insights', async (req, res) => {
+  try {
+    const { stdout } = await execAsync(`coral sql "SELECT r.name, r.language, r.pushed_at, r.open_issues_count, s.name as slack_channel FROM github.repositories r JOIN slack.channels s ON 1=1 WHERE r.owner__login = 'Abhishek10-0' AND r.pushed_at < '2025-11-01' ORDER BY r.pushed_at ASC LIMIT 6" --format json`);
+    const neglected = JSON.parse(stdout);
+
+    // Unique repos nikalo
+    const seen = new Set();
+    const uniqueRepos = neglected.filter(r => {
+      if (seen.has(r.name)) return false;
+      seen.add(r.name);
+      return true;
+    });
+
+    res.json({ neglected: uniqueRepos, total: uniqueRepos.length });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
 // Standup Agent
 app.get('/api/standup', async (req, res) => {
   try {
