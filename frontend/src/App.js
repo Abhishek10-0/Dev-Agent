@@ -221,7 +221,7 @@ WHERE r.pushed_at < '2025-11-01'`}</pre>
             ))}
           </div>
           <div style={{ marginTop: "1rem", color: "#94a3b8", fontSize: "0.75rem", textAlign: "center" }}>
-            ☝️ These repos need attention — consider posting an update in Slack!
+            These repos need attention — consider posting an update in Slack!
           </div>
         </div>
       )}
